@@ -1,0 +1,246 @@
+{
+  "input": {
+    "workflow": {
+      "84": {
+        "inputs": {
+          "filename": "umt5_xxl_fp8_e4m3fn_scaled.safetensors"
+        },
+        "class_type": "CLIPLoader",
+        "_meta": {
+          "title": "CLIPLoader"
+        }
+      },
+      "85": {
+        "inputs": {
+          "text": "disable",
+          "model": [
+            "103",
+            0
+          ],
+          "positive": [
+            "98",
+            0
+          ],
+          "negative": [
+            "98",
+            1
+          ],
+          "latent_image": [
+            "86",
+            0
+          ]
+        },
+        "class_type": "KSamplerAdvanced",
+        "_meta": {
+          "title": "KSamplerAdvanced"
+        }
+      },
+      "86": {
+        "inputs": {
+          "text": "enable",
+          "model": [
+            "104",
+            0
+          ],
+          "positive": [
+            "98",
+            0
+          ],
+          "negative": [
+            "98",
+            1
+          ],
+          "latent_image": [
+            "98",
+            2
+          ]
+        },
+        "class_type": "KSamplerAdvanced",
+        "_meta": {
+          "title": "KSamplerAdvanced"
+        }
+      },
+      "87": {
+        "inputs": {
+          "samples": [
+            "85",
+            0
+          ],
+          "vae": [
+            "90",
+            0
+          ]
+        },
+        "class_type": "VAEDecode",
+        "_meta": {
+          "title": "VAEDecode"
+        }
+      },
+      "89": {
+        "inputs": {
+          "text": "色调艳丽，过曝，静态，细节模糊不清，字幕，风格，作品，画作，画面，静止，整体发灰，最差质量，低质量，JPEG压缩残留，丑陋的，残缺的，多余的手指，画得不好的手部，画得不好的脸部，畸形的，毁容的，形态畸形的肢体，手指融合，静止不动的画面，杂乱的背景，三条腿，背景人很多，倒着走",
+          "clip": [
+            "84",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Negative Prompt)"
+        }
+      },
+      "90": {
+        "inputs": {
+          "filename": "wan_2.1_vae.safetensors"
+        },
+        "class_type": "VAELoader",
+        "_meta": {
+          "title": "VAELoader"
+        }
+      },
+      "93": {
+        "inputs": {
+          "text": "A confident woman walks forward toward the camera at a natural pace. The camera smoothly dollies backward while gradually rising, transitioning from a medium shot to a full-body wide shot. As the camera ascends, it reveals the woman from head to toe and expands the view to show a large, modern cityscape behind her—tall buildings, streets, and urban depth stretching into the distance. The motion is fluid and cinematic, with stable tracking, natural lighting, realistic proportions, and a sense of scale between the woman and the city",
+          "clip": [
+            "84",
+            0
+          ]
+        },
+        "class_type": "CLIPTextEncode",
+        "_meta": {
+          "title": "CLIP Text Encode (Positive Prompt)"
+        }
+      },
+      "94": {
+        "inputs": {
+          "value": 32,
+          "images": [
+            "87",
+            0
+          ]
+        },
+        "class_type": "CreateVideo",
+        "_meta": {
+          "title": "CreateVideo"
+        }
+      },
+      "95": {
+        "inputs": {
+          "filename": "wan2.2_i2v_high_noise_14B_fp8_scaled.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "96": {
+        "inputs": {
+          "filename": "wan2.2_i2v_low_noise_14B_fp8_scaled.safetensors"
+        },
+        "class_type": "UNETLoader",
+        "_meta": {
+          "title": "UNETLoader"
+        }
+      },
+      "98": {
+        "inputs": {
+          "value": 640,
+          "positive": [
+            "93",
+            0
+          ],
+          "negative": [
+            "89",
+            0
+          ],
+          "vae": [
+            "90",
+            0
+          ],
+          "start_image": [
+            "116",
+            0
+          ]
+        },
+        "class_type": "WanImageToVideo",
+        "_meta": {
+          "title": "WanImageToVideo"
+        }
+      },
+      "101": {
+        "inputs": {
+          "filename": "wan2.2_i2v_lightx2v_4steps_lora_v1_high_noise.safetensors",
+          "model": [
+            "95",
+            0
+          ]
+        },
+        "class_type": "LoraLoaderModelOnly",
+        "_meta": {
+          "title": "LoraLoaderModelOnly"
+        }
+      },
+      "102": {
+        "inputs": {
+          "filename": "wan2.2_i2v_lightx2v_4steps_lora_v1_low_noise.safetensors",
+          "model": [
+            "96",
+            0
+          ]
+        },
+        "class_type": "LoraLoaderModelOnly",
+        "_meta": {
+          "title": "LoraLoaderModelOnly"
+        }
+      },
+      "103": {
+        "inputs": {
+          "value": 5.000000000000001,
+          "model": [
+            "102",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingSD3",
+        "_meta": {
+          "title": "ModelSamplingSD3"
+        }
+      },
+      "104": {
+        "inputs": {
+          "value": 5.000000000000001,
+          "model": [
+            "101",
+            0
+          ]
+        },
+        "class_type": "ModelSamplingSD3",
+        "_meta": {
+          "title": "ModelSamplingSD3"
+        }
+      },
+      "108": {
+        "inputs": {
+          "filename": "video/ComfyUI",
+          "video": [
+            "94",
+            0
+          ]
+        },
+        "class_type": "SaveVideo",
+        "_meta": {
+          "title": "SaveVideo"
+        }
+      },
+      "116": {
+        "inputs": {
+          "text": ""
+        },
+        "class_type": "LoadImageFromBase64",
+        "_meta": {
+          "title": "LoadImageFromBase64"
+        }
+      }
+    }
+  }
+}

@@ -1,11 +1,7 @@
 # clean base image containing only comfyui, comfy-cli and comfyui-manager
 FROM runpod/worker-comfyui:5.5.1-base
 
-RUN pip install opencv-python-headless \
- && python - <<EOF
-import cv2
-print("OpenCV OK:", cv2.__version__)
-EOF
+RUN python3 -m pip install --no-cache-dir opencv-python-headless
 
 # install custom nodes into comfyui (first node with --mode remote to fetch updated cache)
 RUN comfy node install --exit-on-fail comfyui-base64-to-image@1.0.0 --mode remote
